@@ -1,0 +1,336 @@
+Task01:
+
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    int aqi[4][7];
+    string city[4]={"Karachi", "Islamabad", "Lahore", "Peshawar"};
+
+    for (int i = 0; i < 4; i++)
+    {
+        cout << "Enter AQI values for " << city[i] << " for 7 days" <<endl;
+        for (int j = 0; j < 7; j++)
+        {
+            cout << "AQI value for day "  << j+1 << ":";
+            cin >> aqi[i][j];
+        }
+    }
+
+    int highestavgcity=0;
+    double highestavg=0.0;
+
+    cout << endl << "Average AQI for each city" << endl;
+    for (int i = 0; i < 4; i++)
+    {
+        double sum=0;
+        for (int j = 0; j < 7; j++)
+        {
+            sum+=aqi[i][j];
+        }
+        double avg=sum/7;
+        cout << city[i] << " average AQI:" << avg << endl;
+
+        if(avg>highestavg){
+            highestavg=avg;
+            highestavgcity=i;
+        }
+    }
+
+    cout << "The city having the worst air quality is " << city[highestavgcity] << " with average AQI: " << highestavg << endl;
+
+    return 0;
+}
+
+
+Task02:
+
+
+#include <iostream>
+
+using namespace std;
+
+
+
+int main(){
+
+    int aqi[4][7];
+
+    string city[4]={"Karachi", "Islamabad", "Lahore", "Peshawar"};
+
+
+
+    for (int i = 0; i < 4; i++)
+
+    {
+
+        cout << "Enter AQI values for " << city[i] << " for 7 days" <<endl;
+
+        for (int j = 0; j < 7; j++)
+
+        {
+
+            cout << "AQI value for day "  << j+1 << ":";
+
+            cin >> aqi[i][j];
+
+        }
+
+    }
+
+    cout << endl << "Critical pollution days for each city" ;
+
+    for (int i = 0; i < 4; i++)
+
+    {
+
+        cout << endl << city[i] << ":";
+
+        bool criticalday=false;
+
+        for (int j = 0; j < 7; j++)
+
+        {
+
+           if(aqi[i][j]>150){
+
+            cout << "Day " << j+1  << " ";
+
+            criticalday=true;
+
+        }
+
+        } 
+
+    if(!criticalday){
+
+            cout << "No critical days found" << endl;
+
+
+
+        }
+
+}
+
+return 0;
+
+}
+
+
+Task03:
+
+
+#include <iostream>
+
+using namespace std;
+
+
+
+int main(){
+
+    int aqi[4][7];
+
+    string city[4]={"Karachi", "Islamabad", "Lahore", "Peshawar"};
+
+
+
+    for (int i = 0; i < 4; i++)
+
+    {
+
+        cout << "Enter AQI values for " << city[i] << " for 7 days" <<endl;
+
+        for (int j = 0; j < 7; j++)
+
+        {
+
+            cout << "AQI value for day "  << j+1 << ":";
+
+            cin >> aqi[i][j];
+
+        }
+
+    }
+
+    cout << endl << "Visual Representation";
+
+    for (int i = 0; i < 4; i++)
+
+    {
+
+        cout << endl << city[i] << endl;
+
+        for (int j = 0; j < 7; j++)
+
+        {
+
+            int stars= aqi[i][j]/50;
+
+            cout << "Day " << j+1  << ":";
+
+            for (int k = 0; k < stars; k++)
+
+            {
+
+                cout << "*";
+
+            }
+
+            cout << endl;
+
+        }
+
+    }
+
+    return 0;
+
+}
+
+Task04:
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    int aqi[4][28];
+    string city[4]={"Karachi", "Islamabad", "Lahore", "Peshawar"};
+
+    for (int i = 0; i < 4; i++)
+    {
+        cout << "Enter AQI values for " << city[i] << " for 28 days" <<endl;
+        for (int j = 0; j < 28; j++)
+        {
+            cout << "AQI value for day "  << j+1 << ":";
+            cin >> aqi[i][j];
+        }
+    }
+
+    cout << endl <<  "Monthly average AQI for each city";
+    double monthlyavg[4]={0};
+    for (int i = 0; i < 4; i++)
+    {
+       double sum=0;
+        for (int j = 0; j < 28; j++)
+        {
+            sum+=aqi[i][j];
+        }
+        monthlyavg[i]=sum/28;
+        cout << city[i] << "monthly average:" << monthlyavg[i] << endl;
+    }
+    double firstWeekAvg[4] = {0};
+    double lastWeekAvg[4] = {0};
+    double improvement[4] = {0};
+
+    for (int i = 0; i < 4; i++) 
+    {
+        double firstWeekSum = 0; 
+        double lastWeekSum = 0;
+        for (int j = 0; j < 7; j++) 
+        {
+            firstWeekSum+=aqi[i][j];
+        }
+        firstWeekAvg[i] = firstWeekSum/7;
+
+        for (int j = 21; j < 28; j++) 
+        {
+            lastWeekSum += aqi[i][j];
+        }
+        lastWeekAvg[i] = lastWeekSum/7;
+        improvement[i] = firstWeekAvg[i]-lastWeekAvg[i];
+    }
+    int mostimprovedcity = 0;
+    double maximprovement = improvement[0];
+    for (int i = 1; i < 4; i++) 
+    {
+        if (improvement[i] > maximprovement){
+            maximprovement = improvement[i];
+            mostimprovedcity= i;
+        }
+    }
+    cout << "The city with the most improved air quality is "<< city[mostimprovedcity] << "with improvement of:" << maximprovement << endl;
+    return 0;
+}
+
+
+
+Task05:
+
+
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    int aqi[4][28];
+    string city[4]={"KHI", "ISB", "LHE", "PEW"};
+
+    for (int i = 0; i < 4; i++)
+    {
+        cout << "Enter AQI values for " << city[i] << " for 28 days" <<endl;
+        for (int j = 0; j < 28; j++)
+        {
+            cout << "AQI value for day "  << j+1 << ":";
+            cin >> aqi[i][j];
+        }
+    }
+    double weeklyavg[4][4] = {0};
+    for (int i = 0; i < 4; i++)
+    {
+        for (int week = 0; week < 4; week++)
+        {
+            double sum = 0;
+            for (int day = week*7; day<(week + 1)*7; day++)
+            {
+                sum += aqi[i][day];
+            }
+            weeklyavg[i][week] = sum/7;
+        }
+    }
+
+    cout << endl << "Critical pollution days" << endl;
+    for (int i = 0; i < 4; i++)
+    {
+        cout << city[i] << ": ";
+        for (int j = 0; j < 28; j++)
+        {
+            if (aqi[i][j] > 150){
+                cout << "Day " << j + 1 << " ";
+            }
+        }
+        cout << endl;
+    }
+
+    int highest[4] = {0};
+    int lowest[4] = {1000};
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 28; j++)
+        {
+            if (aqi[i][j]>highest[i]) highest[i] = aqi[i][j];
+            if (aqi[i][j]<lowest[i]) lowest[i] = aqi[i][j];
+        }
+    }
+
+    cout << "Weekly averages for each city" << endl;
+    cout << "City\t" << "Week 01\t" << "Week 02\t" <<"Week 03\t" << "Week 04" << endl;
+    for (int i = 0; i < 4; i++)
+    {
+        cout << city[i];
+        for (int week = 0; week < 4; week++)
+        {
+            cout << "\t "<< weeklyavg[i][week];
+        }
+        cout << endl;
+    }
+    cout << "Highest and Lowest AQI values" << endl;
+    cout << "City\t" << "Highest\t" << "Lowest\t"<< endl;
+    for (int i = 0; i < 4; i++)
+    {
+        cout << city[i] <<"\t" << highest[i]<<"\t"<<lowest[i]<<endl;
+    }
+    return 0;
+}
+
