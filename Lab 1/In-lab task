@@ -1,0 +1,317 @@
+Task 01:
+
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    const int max_limit = 5;
+    string groupA[max_limit];
+    string groupB[max_limit];
+    int groupACount;
+    int groupBCount;
+    string participantName;
+
+    cout << "Enter the number of participants for Group A: ";
+    cin >> groupACount;
+
+    if(groupACount > max_limit){
+        groupACount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group A" << endl;
+    for (int i = 0; i < groupACount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupA[i];
+    }
+
+    cout << "Enter the number of participants for Group B: ";
+    cin >> groupBCount;
+
+    if(groupBCount > max_limit){
+        groupBCount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group B" << endl;
+    for (int i = 0; i < groupBCount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupB[i];
+    }
+
+    cout << "Enter the name of participant to find: ";
+    cin >> participantName;
+
+    bool found = false;
+
+    for (int i = 0; i < max_limit; i++)
+    {
+        if(groupA[i] == participantName){
+            cout << participantName << " is registered in Group A";
+            found = true;
+        }
+        if(groupB[i] == participantName){
+            cout << participantName << " is registered in Group B";
+            found = true;
+        }
+    }
+    if(!found){
+        cout << participantName << " is not registered in any group";
+    }
+    return 0;
+}
+
+Task02:
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int max_limit = 5;
+    string groupA[max_limit];
+    string groupB[max_limit];
+    int groupACount;
+    int groupBCount;
+    string participantName;
+
+    cout << "Enter the number of participants for Group A: ";
+    cin >> groupACount;
+
+    if(groupACount > max_limit){
+        groupACount = max_limit;
+        cout << "Only " << max_limit << " allowed" << endl;
+    }
+
+    cout << "Enter participants for Group A" << endl;
+    for (int i = 0; i < groupACount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupA[i];
+    }
+
+    cout << "Enter the number of participants for Group B: ";
+    cin >> groupBCount;
+
+    if(groupBCount > max_limit){
+        groupBCount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group B" << endl;
+    for (int i = 0; i < groupBCount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupB[i];
+    }
+
+    cout << "Enter the name of participant to find: ";
+    cin >> participantName;
+
+    bool found = false;
+
+    for (int i = 0; i < max_limit; i++)
+    {
+        if(groupA[i] == participantName){
+            cout << participantName << " is registered in Group A";
+            found = true;
+        }
+        if(groupB[i] == participantName){
+            cout << participantName << " is registered in Group B";
+            found = true;
+        }
+    }
+    if(!found){
+        cout << participantName << " is not registered in any group";
+    }
+    return 0;
+}
+
+
+Task03:
+
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    const int max_limit = 5;
+    string groupA[max_limit];
+    string groupB[max_limit];
+    int groupACount;
+    int groupBCount;
+
+    cout << "Enter the number of participants for Group A: ";
+    cin >> groupACount;
+
+    if(groupACount > max_limit){
+        groupACount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group A" << endl;
+    for (int i = 0; i < groupACount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupA[i];
+    }
+
+    cout << "Enter the number of participants for Group B: ";
+    cin >> groupBCount;
+
+    if(groupBCount > max_limit){
+        groupBCount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group B" << endl;
+    for (int i = 0; i < groupBCount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupB[i];
+    }
+
+    cout << "Participants of Group A" << endl;
+    for (int i = groupACount-1; i >= 0; i--)
+    {
+       cout << groupA[i] <<endl;
+    }
+
+    cout << "Participants of Group B" << endl;
+    for (int i = groupBCount-1; i >= 0; i--)
+    {
+       cout << groupB[i] <<endl;
+    }
+    return 0;
+}
+
+
+
+Task04:
+
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    const int max_limit = 5;
+    string groupA[max_limit];
+    string groupB[max_limit];
+    int groupACount;
+    int groupBCount;
+
+    cout << "Enter the number of participants for Group A: ";
+    cin >> groupACount;
+
+    if(groupACount > max_limit){
+        groupACount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group A" << endl;
+    for (int i = 0; i < groupACount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupA[i];
+    }
+
+    cout << "Enter the number of participants for Group B: ";
+    cin >> groupBCount;
+
+    if(groupBCount > max_limit){
+        groupBCount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group B" << endl;
+    for (int i = 0; i < groupBCount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupB[i];
+    }
+
+    cout << "Participants of Group A" << endl;
+    for (int i = groupACount-1; i >= 0; i--)
+    {
+       cout << groupA[i] <<endl;
+    }
+
+    cout << "Participants of Group B" << endl;
+    for (int i = groupBCount-1; i >= 0; i--)
+    {
+       cout << groupB[i] <<endl;
+    }
+    return 0;
+}
+
+
+
+Task05:
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    const int max_limit = 5;
+    string groupA[max_limit];
+    string groupB[max_limit];
+    int groupACount;
+    int groupBCount;
+
+    cout << "Enter the number of participants for Group A: ";
+    cin >> groupACount;
+
+    if(groupACount > max_limit){
+        groupACount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group A" << endl;
+    for (int i = 0; i < groupACount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupA[i];
+    }
+
+    cout << "Enter the number of participants for Group B: ";
+    cin >> groupBCount;
+
+    if(groupBCount > max_limit){
+        groupBCount = max_limit;
+        cout << "Only " << max_limit << " allowed." << endl;
+    }
+
+    cout << "Enter participants for Group B" << endl;
+    for (int i = 0; i < groupBCount; i++)
+    {
+        cout << "Name of " << i+1 << " participant: ";
+        cin >> groupB[i];
+    }
+
+    cout << "Bar Chart" << endl;
+    cout << "Group A: ";
+    for (int i = 0; i < groupACount; i++)
+    {
+        cout << "*";
+    }
+
+    cout << endl << "Group B: ";
+    for (int i = 0; i < groupBCount; i++)
+    {
+        cout << "*";
+    }
+
+    return 0;
+}
+
