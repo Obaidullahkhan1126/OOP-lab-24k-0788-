@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+
+int** allocateMatrix(int rowCount, int colCount) {
+    int** matrix = new int*[rowCount];
+
+    for (int i = 0; i < rowCount; i++) {
+        matrix[i] = new int[colCount];
+    }
+    return matrix;
+}
+
+void inputMatrix(int** matrixPtr, int rowCount, int colCount, const string& matrixName) {
+    cout << "Enter the values for the " << matrixName << " matrix:" << endl;
+    for (int i = 0; i < rowCount; i++) {
+        for (int j = 0; j < colCount; j++) {
+            cout << "Element at row " << i + 1 << ", column " << j + 1 << ": ";
+            cin >> matrixPtr[i][j];
+        } 
+    }
+}
+
+void displayMatrix(int** matrixPtr, int rowCount, int colCount, const string& matrixName) {
+    cout << matrixName << " Matrix:" << endl;
+    for (int i = 0; i < rowCount; i++) {
+        cout << "|";
+        for (int j = 0; j < colCount; j++) {
+            cout << matrixPtr[i][j] << "|";
+        }
+        cout << endl;
+    }
+}
+
+int** addTwoMatrices(int** matrixA, int** matrixB, int rowCount, int colCount) {
+    int** sumMatrix = allocateMatrix(rowCount, colCount);
+    for (int i = 0; i < rowCount; i++) {
+        for (int j = 0; j < colCount; j++) {
+            sumMatrix[i][j] = matrixA[i][j] + matrixB[i][j];
+        }
+    }
+    return sumMatrix;
+}
+
+int** subtractTwoMatrices(int** matrixA, int** matrixB, int rowCount, int colCount) {
+    int** diffMatrix = allocateMatrix(rowCount, colCount);
+    for (int i = 0; i < rowCount; i++) {
+        for (int j = 0; j < colCount; j++) {
+            diffMatrix[i][j] = matrixA[i][j] - matrixB[i][j];
+        }
+    }
+    return diffMatrix;
+}
+
+void deallocateMatrix(int** matrixPtr, int rowCount) {
+    for (int i = 0; i < rowCount; i++) {
+        delete[] matrixPtr[i];
+    }
+    delete[] matrixPtr;
+}
+
+int main() {
+    int rowCount, colCount;
+
+    cout << "Enter the number of rows: ";
+    cin >> rowCount;
+
+    cout << "Enter the number of columns: ";
+    cin >> colCount;
+
+    int** matrixA = allocateMatrix(rowCount, colCount);
+    int** matrixB = allocateMatrix(rowCount, colCount);
+
+    inputMatrix(matrixA, rowCount, colCount, "First");
+    inputMatrix(matrixB, rowCount, colCount, "Second");
+
+    int** sumMatrix = addTwoMatrices(matrixA, matrixB, rowCount, colCount);
+    int** diffMatrix = subtractTwoMatrices(matrixA, matrixB, rowCount, colCount);
+
+    displayMatrix(matrixA, rowCount, colCount, "First");
+    displayMatrix(matrixB, rowCount, colCount, "Second");
+    displayMatrix(sumMatrix, rowCount, colCount, "Sum");
+    displayMatrix(diffMatrix, rowCount, colCount, "Difference");
+
+    deallocateMatrix(matrixA, rowCount);
+    deallocateMatrix(matrixB, rowCount);
+    deallocateMatrix(sumMatrix, rowCount);
+    deallocateMatrix(diffMatrix, rowCount);
+
+    return 0;
+}
