@@ -1,1 +1,51 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct LibraryBook {
+    string bookTitle;
+    string bookAuthor;
+    int publicationYear;
+};
+
+int main() {
+    int totalBooks;
+    cout << "Enter the total number of books: ";
+    cin >> totalBooks;
+
+    LibraryBook *bookCollection = new LibraryBook[totalBooks];
+
+    for (int i = 0; i < totalBooks; i++) {
+        cout << "Enter details for book " << i + 1 << ":" << endl;
+        cout << "Book Title: ";
+        cin >> bookCollection[i].bookTitle;
+        cout << "Book Author: ";
+        cin >> bookCollection[i].bookAuthor;
+        cout << "Publication Year: ";
+        cin >> bookCollection[i].publicationYear;
+    }
+
+    int searchYear;
+    cout << "Enter a year to find books published after it: ";
+    cin >> searchYear;
+
+    cout << "Books published after " << searchYear << ":" << endl;
+    bool isFound = false;
+
+    for (int i = 0; i < totalBooks; i++) {
+        if (bookCollection[i].publicationYear > searchYear) {
+            cout << "Title: " << bookCollection[i].bookTitle << endl;
+            cout << "Author: " << bookCollection[i].bookAuthor << endl;
+            cout << "Year: " << bookCollection[i].publicationYear << endl;
+            isFound = true;
+        }
+    }
+
+    if (!isFound) {
+        cout << "No books were published after " << searchYear << "." << endl;
+    }
+
+    delete[] bookCollection;
+    return 0;
+}
 
