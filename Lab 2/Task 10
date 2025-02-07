@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int dimX, dimY, dimZ;
+
+    cout << "Enter the dimensions for the 3D array (X Y Z): ";
+    cin >> dimX >> dimY >> dimZ;
+
+    int*** threeDArray = new int**[dimX];
+    for (int i = 0; i < dimX; i++) {
+        threeDArray[i] = new int*[dimY];
+        for (int j = 0; j < dimY; j++) {
+            threeDArray[i][j] = new int[dimZ];
+        }
+    }
+
+    cout << "Enter " << (dimX * dimY * dimZ) << " elements:" << endl;
+    for (int i = 0; i < dimX; i++) {
+        for (int j = 0; j < dimY; j++) {
+            for (int k = 0; k < dimZ; k++) {
+                cin >> threeDArray[i][j][k];
+            }
+        }
+    }
+
+    cout << "Elements of the 3D array:\n";
+    for (int i = 0; i < dimX; i++) {
+        cout << "Layer " << i + 1 << ":" << endl;
+        for (int j = 0; j < dimY; j++) {
+            for (int k = 0; k < dimZ; k++) {
+                cout << threeDArray[i][j][k] << " ";
+            }
+            cout << endl;
+        }
+        cout << "-------" << endl;
+    }
+
+    for (int i = 0; i < dimX; i++) {
+        for (int j = 0; j < dimY; j++) {
+            delete[] threeDArray[i][j];
+        }
+        delete[] threeDArray[i];
+    }
+    delete[] threeDArray;
+
+    return 0;
+}
