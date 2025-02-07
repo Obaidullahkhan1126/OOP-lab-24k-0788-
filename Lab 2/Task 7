@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int matrixARows, matrixACols;
+    int matrixBRows, matrixBCols;
+
+    cout << "Enter the number of rows and columns for Matrix A: ";
+    cin >> matrixARows >> matrixACols;
+    cout << "Enter the number of rows and columns for Matrix B: ";
+    cin >> matrixBRows >> matrixBCols;
+
+    if (matrixACols != matrixBRows) {
+        cout << "Matrix multiplication is not possible with the given dimensions." << endl;
+        return 1;
+    }
+
+    int** matrixA = new int*[matrixARows];
+    int** matrixB = new int*[matrixBRows];
+    int** matrixProduct = new int*[matrixARows];
+
+    for (int i = 0; i < matrixARows; i++) {
+        matrixA[i] = new int[matrixACols];
+    }
+    for (int i = 0; i < matrixBRows; i++) {
+        matrixB[i] = new int[matrixBCols];
+    }
+    for (int i = 0; i < matrixARows; i++) {
+        matrixProduct[i] = new int[matrixBCols];
+    }
+
+    cout << "Enter the elements of Matrix A: " << endl;
+    for (int i = 0; i < matrixARows; i++) {
+        for (int j = 0; j < matrixACols; j++) {
+            cin >> matrixA[i][j];
+        }
+    }
+
+    cout << "Enter the elements of Matrix B: " << endl;
+    for (int i = 0; i < matrixBRows; i++) {
+        for (int j = 0; j < matrixBCols; j++) {
+            cin >> matrixB[i][j];
+        }
+    }
+
+    for (int i = 0; i < matrixARows; i++) {
+        for (int j = 0; j < matrixBCols; j++) {
+            matrixProduct[i][j] = 0;
+            for (int k = 0; k < matrixACols; k++) {
+                matrixProduct[i][j] += matrixA[i][k] * matrixB[k][j];
+            }
+        }
+    }
+
+    cout << "Resultant Matrix (Product):" << endl;
+    for (int i = 0; i < matrixARows; i++) {
+        cout << "|";
+        for (int j = 0; j < matrixBCols; j++) {
+            cout << matrixProduct[i][j] << "|";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < matrixARows; i++) {
+        delete[] matrixA[i];
+    }
+    for (int i = 0; i < matrixBRows; i++) {
+        delete[] matrixB[i];
+    }
+    for (int i = 0; i < matrixARows; i++) {
+        delete[] matrixProduct[i];
+    }
+
+    delete[] matrixA;
+    delete[] matrixB;
+    delete[] matrixProduct;
+
+    return 0;
+}
