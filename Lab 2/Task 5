@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int totalElements;
+
+    cout << "Enter the total number of elements: ";
+    cin >> totalElements;
+
+    int* numArray = new int[totalElements];
+
+    for (int i = 0; i < totalElements; i++) {
+        cout << "Enter element " << i + 1 << ": ";
+        cin >> *(numArray + i);
+    }
+
+    cout << "Array elements: ";
+    for (int i = 0; i < totalElements; i++) {
+        cout << *(numArray + i) << " ";
+    }
+    cout << endl;
+
+    int totalSum = 0;
+    int* numPtr = numArray;
+    for (int i = 0; i < totalElements; i++) {
+        totalSum += *(numPtr + i);
+    }
+
+    cout << "Sum of array elements: " << totalSum << endl;
+
+    delete[] numArray;
+
+    return 0;
+}
