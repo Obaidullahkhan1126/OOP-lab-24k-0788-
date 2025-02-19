@@ -1,0 +1,82 @@
+#include <iostream>
+using namespace std;
+
+int MAX_TRACKS = 100;
+
+class AudioPlayer {
+private:
+    string tracklist[MAX_TRACKS];
+    int trackCount;
+    string currentTrack;
+
+public:
+    AudioPlayer() {
+        trackCount = 0;
+        currentTrack = "No track is currently playing.";
+    }
+
+    void addTrack(string track) {
+        if (trackCount < MAX_TRACKS) {
+            tracklist[trackCount] = track;
+            trackCount++;
+            cout << track << " has been added to the playlist." << endl;
+        } else {
+            cout << "Cannot add more tracks." << endl;
+        }
+    }
+
+    void removeTrack(string track) {
+        for (int i = 0; i < trackCount; i++) {
+            if (tracklist[i] == track) {
+                for (int j = i; j < trackCount - 1; j++) {
+                    tracklist[j] = tracklist[j + 1];
+                }
+                trackCount--;
+                cout << track << " has been removed from the playlist." << endl;
+                if (currentTrack == track) {
+                    currentTrack = "No track is currently playing.";
+                }
+                return;
+            }
+        }
+        cout << "Track not found in the playlist." << endl;
+    }
+
+    void playTrack(string track) {
+        for (int i = 0; i < trackCount; i++) {
+            if (tracklist[i] == track) {
+                currentTrack = track;
+                cout << "Now playing: " << track << endl;
+                return;
+            }
+        }
+        cout << "Track not found in the playlist." << endl;
+    }
+
+    void showPlaylist() {
+        cout << "Playlist:" << endl;
+        if (trackCount == 0) {
+            cout << "No tracks in the playlist." << endl;
+            return;
+        }
+        for (int i = 0; i < trackCount; i++) {
+            cout << i + 1 << ". " << tracklist[i] << endl;
+        }
+        cout << "Currently playing: " << currentTrack << endl;
+    }
+};
+
+int main() {
+    AudioPlayer userPlayer;
+
+    userPlayer.addTrack("Track 1");
+    userPlayer.addTrack("Track 2");
+    userPlayer.addTrack("Track 3");
+    userPlayer.showPlaylist();
+
+    userPlayer.playTrack("Track 2");
+    userPlayer.removeTrack("Track 2");
+    userPlayer.showPlaylist();
+
+    return 0;
+}
