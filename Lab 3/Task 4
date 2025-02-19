@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+
+class Vehicle {
+private:
+    string manufacturer;
+    string modelType;
+    float maxFuelCapacity;
+    float currentFuel;
+    float fuelUsageRate;
+
+public:
+    Vehicle(string brand, string model, float capacity, float consumption) {
+        manufacturer = brand;
+        modelType = model;
+        maxFuelCapacity = capacity;
+        currentFuel = capacity;
+        fuelUsageRate = consumption;
+    }
+
+    void travel(float distance) {
+        float fuelRequired = distance * fuelUsageRate;
+
+        if (fuelRequired > currentFuel) {
+            cout << "Insufficient fuel to cover " << distance << " km. Please refuel." << endl;
+        } else {
+            currentFuel -= fuelRequired;
+            cout << "Traveled " << distance << " km. Remaining fuel: " << currentFuel << " liters." << endl;
+        }
+        fuelWarning();
+    }
+
+    void refillFuel(float fuelAmount) {
+        if (fuelAmount <= 0) {
+            cout << "Invalid fuel amount." << endl;
+            return;
+        }
+
+        if (currentFuel + fuelAmount > maxFuelCapacity) {
+            currentFuel = maxFuelCapacity;
+            cout << "Tank is now full." << endl;
+        } else {
+            currentFuel += fuelAmount;
+            cout << "Added " << fuelAmount << " liters. Current fuel level: " << currentFuel << " liters." << endl;
+        }
+    }
+
+    void fuelWarning() {
+        if (currentFuel < (maxFuelCapacity * 0.15)) {
+            cout << "Warning! Fuel level is low. Please refuel soon." << endl;
+        }
+    }
+
+    void showVehicleDetails() {
+        cout << "Vehicle Information:" << endl;
+        cout << "Manufacturer: " << manufacturer << endl;
+        cout << "Model: " << modelType << endl;
+        cout << "Fuel Capacity: " << maxFuelCapacity << " liters" << endl;
+        cout << "Current Fuel Level: " << currentFuel << " liters" << endl;
+    }
+};
+
+int main() {
+    Vehicle userVehicle("Toyota", "Corolla", 30, 0.20);
+
+    userVehicle.showVehicleDetails();
+
+    userVehicle.travel(100);
+    userVehicle.refillFuel(90);
+    userVehicle.travel(150);
+
+    return 0;
+}
