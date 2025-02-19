@@ -1,1 +1,60 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class DigitalWallet {
+private:
+    string userName;
+    double balance;
+    string transactionLog[100];
+    int transactionIndex = 0;
+
+public:
+    DigitalWallet(string name, double initialBalance) {
+        userName = name;
+        balance = initialBalance;
+    }
+
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposit successful!" << endl;
+            transactionLog[transactionIndex++] = "Deposited: " + to_string(amount);
+        } else {
+            cout << "Invalid deposit amount." << endl;
+        }
+    }
+
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            transactionLog[transactionIndex++] = "Withdrawn: " + to_string(amount);
+            cout << "Withdrawal successful!" << endl;
+        } else if (amount > balance) {
+            cout << "Error: Insufficient funds." << endl;
+        } else {
+            cout << "Invalid withdrawal amount." << endl;
+        }
+    }
+
+    void showTransactions() {
+        cout << "Transaction History:" << endl;
+        if (transactionIndex == 0) {
+            cout << "No transactions recorded yet." << endl;
+        } else {
+            for (int i = 0; i < transactionIndex; i++) {
+                cout << transactionLog[i] << endl;
+            }
+        }
+    }
+};
+
+int main() {
+    DigitalWallet userWallet("Alex", 7000.0);
+    userWallet.deposit(4000);
+    userWallet.withdraw(2500);
+    userWallet.showTransactions();
+
+    return 0;
+}
 
