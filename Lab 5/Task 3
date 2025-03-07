@@ -46,7 +46,7 @@ public:
 };
 
 int main() {
-    Employee e1("Ali", "Manager"), e2("Ayesha", "Coordinator"), e3("Ahmed", "Worker");
+    Employee e1("Ali", "Manager"), e2("Ayesha", "Coordinator"), e3("Ahmed", "Member");
 
     Project p1("Frontend development", "28-02-2025"), p2("Bckend development ", "07-03-2025");
 
