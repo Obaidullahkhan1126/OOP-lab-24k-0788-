@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee{
+public:
+    string name;
+    string designation;
+
+    Employee(string n, string d) : name(n), designation(d) {}
+
+    void display() {
+        cout << "Employee Name: " << name << ", Designation: " << designation << endl;
+    }
+};
+
+class Project{
+public:
+    string title;
+    string deadline;
+    Employee* employees[10];
+    int employeeCount = 0;
+
+    Project(string t, string d) : title(t), deadline(d) {}
+
+    void addEmployee(Employee* e) {
+        if (employeeCount < 10) {
+            employees[employeeCount++] = e;
+        } else {
+            cout << "More employees cannot be added" << endl;
+        }
+    }
+
+    void display() {
+        cout << "Project Title: " << title << endl << "Deadline: " << deadline << endl << "Assigned Employees: " << endl;
+        if (employeeCount == 0) {
+            cout << "No employees assigned.";
+        } else {
+            for (int i = 0; i < employeeCount; i++)
+            {
+                employees[i]->display();
+            }
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Employee e1("Ali", "Manager"), e2("Ayesha", "Coordinator"), e3("Ahmed", "Worker");
+
+    Project p1("Frontend development", "28-02-2025"), p2("Bckend development ", "07-03-2025");
+
+    p1.addEmployee(&e1);
+    p1.addEmployee(&e2);
+    p2.addEmployee(&e2);
+    p2.addEmployee(&e3);
+
+    cout << "Project 1 Details:" << endl;
+    p1.display();
+
+    cout << "Project 2 Details:" << endl;
+    p2.display();
+
+    return 0;
+}
