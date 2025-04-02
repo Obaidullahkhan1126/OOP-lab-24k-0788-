@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+protected:
+    string name;
+    int age;
+    string contactNumber;
+    string address;
+
+public:
+    Person(string n, int a, string contact, string addr) : name(n), age(a), contactNumber(contact), address(addr) {}
+    
+    virtual void displayInfo() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Contact: " << contactNumber << endl;
+        cout << "Address: " << address << endl;
+    }
+    
+    virtual void updateInfo(string Contact2, string Address2) {
+        contactNumber = Contact2;
+        address = Address2;
+    }
+    
+};
+
+class Patient : public Person {
+private:
+    int patientID;
+    string medicalHistory;
+    string doctorAssigned;
+
+public:
+    Patient(string n, int a, string contact, string addr, int id, string history, string doctor) : Person(n, a, contact, addr), patientID(id), medicalHistory(history), doctorAssigned(doctor) {}
+    
+    void displayInfo() {
+        Person::displayInfo();
+        cout << "Patient ID: " << patientID << endl;
+        cout << "Medical History: " << medicalHistory << endl;
+        cout << "Doctor Assigned: " << doctorAssigned << endl;
+    }
+};
+
+class Doctor : public Person {
+private:
+    string specialization;
+    double consultationFee;
+    string patientsList;
+
+public:
+    Doctor(string n, int a, string contact, string addr, string spec, double fee, string patients) : Person(n, a, contact, addr), specialization(spec), consultationFee(fee), patientsList(patients) {}
+    
+    void displayInfo() {
+        Person::displayInfo();
+        cout << "Specialization: " << specialization << endl;
+        cout << "Consultation Fee: " << consultationFee << endl;
+        cout << "Patients List: " << patientsList << endl;
+    }
+};
+
+class Nurse : public Person {
+private:
+    string assignedWard;
+    string shiftTimings;
+
+public:
+    Nurse(string n, int a, string contact, string addr, string ward, string shift) : Person(n, a, contact, addr), assignedWard(ward), shiftTimings(shift) {}
+    
+    void displayInfo(){
+        Person::displayInfo();
+        cout << "Assigned Ward: " << assignedWard << endl;
+        cout << "Shift Timings: " << shiftTimings << endl;
+    }
+};
+
+class Administrator : public Person {
+private:
+    string department;
+    double salary;
+
+public:
+    Administrator(string n, int a, string contact, string addr, string dept, double sal) : Person(n, a, contact, addr), department(dept), salary(sal) {}
+    
+    void updateInfo(string Contact2, string Address2, double Salary2) {
+        Person::updateInfo(Contact2, Address2);
+        salary = Salary2;
+    }
+};
+
+int main() {
+    Patient patient("Mujeeb", 35, "1234-56789", "Malir cantt", 150, "spine pain", "Dr.Hasan");
+    Doctor doctor("Dr.Hasan", 45, "1234-56789", "Malir", "Neurologist", 500.0, "Aqeel", "Samad");
+    Nurse nurse("Bhushra", 20, "9876-54321", "shah faisal", "A", "Night Shift");
+    Administrator admin("Umair", 50, "6373-78364", "Gulshan", "HR", 70000.0);
+
+    patient.displayInfo();
+    cout << endl;
+    doctor.displayInfo();
+    cout << endl;
+    nurse.displayInfo();
+    cout << endl;
+    
+    return 0;
+}
