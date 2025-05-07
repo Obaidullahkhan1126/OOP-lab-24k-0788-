@@ -40,11 +40,11 @@ int main() {
             cout << "ID: " << id << endl;
             cout << "Name: " << name << endl;
             cout << "Year (int): " << year << endl;
-            cout << "Batterytype:  << Batterytype << endl;
-            cout << "Certification: " << certification << endl;
+            cout << "Batterytype:  << batterytype << endl;
+            cout << "Certified: " << certified << endl;
             cout << endl;
         } else {
-            cout << "Year field is empty for line: " << line << endl;
+            cout << "Year is not mentioned on line: " << line << endl;
         }
     }
 
