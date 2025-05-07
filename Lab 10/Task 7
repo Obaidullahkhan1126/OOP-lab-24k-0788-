@@ -1,0 +1,24 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+    ofstream sensorFile("sensor_log.txt");
+    if (!sensorFile) {
+        cerr << "Cannot open file for writing" << endl;
+        return 1;
+    }
+
+    sensorFile << "This is the first set of data ";
+    streampos pos1 = sensorFile.tellp();
+    cout << "Position after first write: " << pos1 << endl;
+
+    sensorFile << "This is the second set of data";
+    streampos pos2 = sensorFile.tellp();
+    cout << "Position after second write: " << pos2 << endl;
+
+    sensorFile.close();
+
+    return 0;
+}
