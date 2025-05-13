@@ -1,0 +1,88 @@
+#include <iostream>
+#include <sstream>
+#include <exception>
+
+using namespace std;
+
+class DimensionMismatchException : public exception {
+    string errorMsg;
+public:
+    DimensionMismatchException(int r1, int c1, int r2, int c2) {
+        stringstream msg;
+        msg << "DimensionMismatchException - Cannot add (" 
+            << r1 << "x" << c1 << ") with (" << r2 << "x" << c2 << ")";
+        errorMsg = msg.str();
+    }
+
+    const char* what() const noexcept override {
+        return errorMsg.c_str();
+    }
+};
+
+template <typename T>
+class Matrix {
+private:
+    int numRows, numCols;
+    T** elements;
+
+public:
+    Matrix(int r, int c) : numRows(r), numCols(c) {
+        elements = new T*[numRows];
+        for (int i = 0; i < numRows; ++i)
+            elements[i] = new T[numCols];
+    }
+
+    ~Matrix() {
+        for (int i = 0; i < numRows; ++i)
+            delete[] elements[i];
+        delete[] elements;
+    }
+
+    void readInput() {
+        cout << "Input " << numRows << "x" << numCols << " matrix values:" << endl;
+        for (int i = 0; i < numRows; ++i)
+            for (int j = 0; j < numCols; ++j)
+                cin >> elements[i][j];
+    }
+
+    void show() const {
+        cout << "Matrix (" << numRows << "x" << numCols << "):" << endl;
+        for (int i = 0; i < numRows; ++i) {
+            for (int j = 0; j < numCols; ++j)
+                cout << elements[i][j] << " ";
+            cout << endl;
+        }
+    }
+
+    Matrix<T> operator+(const Matrix<T>& other) const {
+        if (numRows != other.numRows || numCols != other.numCols)
+            throw DimensionMismatchException(numRows, numCols, other.numRows, other.numCols);
+
+        Matrix<T> sum(numRows, numCols);
+        for (int i = 0; i < numRows; ++i)
+            for (int j = 0; j < numCols; ++j)
+                sum.elements[i][j] = elements[i][j] + other.elements[i][j];
+        return sum;
+    }
+};
+
+int main() {
+    try {
+        Matrix<int> matA(2, 2);
+        Matrix<int> matB(3, 3);
+
+        cout << "Matrix A:" << endl;
+        matA.readInput();
+
+        cout << "Matrix B:" << endl;
+        matB.readInput();
+
+        Matrix<int> result = matA + matB;
+        result.show();
+    }
+    catch (const DimensionMismatchException& e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
+}
