@@ -1,0 +1,85 @@
+#include <iostream>
+#include <exception>
+using namespace std;
+
+class QueueOverflowException : public exception {
+   
+};
+
+class QueueUnderflowException : public exception {
+  
+};
+
+template <typename T>
+class BoundedQueue {
+private:
+    int head;
+    int tail;
+    int count;
+    int maxSize;
+    T* buffer;
+
+public:
+    BoundedQueue(int cap) : maxSize(cap), head(0), tail(-1), count(0) {
+        buffer = new T[maxSize];
+    }
+
+    ~BoundedQueue() {
+        delete[] buffer;
+    }
+
+    void push(T item) {
+        if (isFull())
+            throw QueueOverflowException();
+
+        tail = (tail + 1) % maxSize;
+        buffer[tail] = item;
+        ++count;
+    }
+
+    T pop() {
+        if (isEmpty())
+            throw QueueUnderflowException();
+
+        T item = buffer[head];
+        head = (head + 1) % maxSize;
+        --count;
+        return item;
+    }
+
+    bool isEmpty() const {
+        return count == 0;
+    }
+
+    bool isFull() const {
+        return count == maxSize;
+    }
+};
+
+int main() {
+    BoundedQueue<int> queue1(3);
+
+    try {
+        cout << "Filling the queue beyond its capacity" << endl;
+        queue1.push(100);
+        queue1.push(200);
+        queue1.push(300);
+        queue1.push(400); 
+    }
+    catch (const QueueOverflowException& ex) {
+        cout << "QueueOverflowException caught" << endl;
+        cout << "what(): " << ex.what() << endl;
+    }
+
+    BoundedQueue<int> queue2(2);
+    try {
+        cout << "\nTrying to remove an element from an empty queue" << endl;
+        queue2.pop(); 
+    }
+    catch (const QueueUnderflowException& ex) {
+        cout << "QueueUnderflowException caught" << endl;
+        cout << "what(): " << ex.what() << endl;
+    }
+
+    return 0;
+}
