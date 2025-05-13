@@ -1,0 +1,58 @@
+#include <iostream>
+#include <exception>
+#include <string>
+using namespace std;
+
+class DBException : public exception {
+public:
+    const char* what() const noexcept override {
+        return "A database error occurred.";
+    }
+};
+
+class FailedConnectionException : public DBException {
+};
+
+class TimeoutQueryException : public DBException {
+};
+
+template <typename T>
+class DBHandler {
+private:
+    string connectionString;
+public:
+    DBHandler(string db) : connectionString(db) {}
+
+    void initiateConnection() {
+        if (connectionString == "invalid_db")
+            throw FailedConnectionException();
+        else if (connectionString == "slow_db")
+            throw TimeoutQueryException();
+        else
+            cout << "Successfully connected to " << connectionString << endl;
+    }
+};
+
+int main() {
+    try {
+        cout << "Trying to connect to invalid_db" << endl;
+        DBHandler<int> conn1("invalid_db");
+        conn1.initiateConnection();
+    }
+    catch (const FailedConnectionException& e) {
+        cout << "Caught FailedConnectionException" << endl;
+        cout << "what(): " << e.what() << endl;
+    }
+
+    try {
+        cout << "Trying to connect to slow_db" << endl;
+        DBHandler<int> conn2("slow_db");
+        conn2.initiateConnection();
+    }
+    catch (const DBException& e) {
+        cout << "Caught general DBException" << endl;
+        cout << "what(): " << e.what() << endl;
+    }
+
+    return 0;
+}
