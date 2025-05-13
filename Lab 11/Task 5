@@ -1,0 +1,49 @@
+#include <iostream>
+#include <exception>
+using namespace std;
+
+class NegativeStockException : public exception {
+};
+
+class OverCapacityException : public exception {
+};
+
+template <typename T>
+class InventoryItem {
+private:
+    T quantity;
+    T capacityLimit;
+public:
+    InventoryItem(T limit) : quantity(0), capacityLimit(limit) {}
+
+    void updateStock(T newAmount) {
+        if (newAmount < 0)
+            throw NegativeStockException();
+        else if (newAmount > capacityLimit)
+            throw OverCapacityException();
+        quantity = newAmount;
+        cout << "Stock updated to: " << quantity << endl;
+    }
+};
+
+int main() {
+    InventoryItem<int> product(100);
+
+    try {
+        cout << "Attempting to set stock to -5" << endl;
+        product.updateStock(-5);
+    }
+    catch (const NegativeStockException& e) {
+        cout << "Caught NegativeStockException - what(): " << e.what() << endl;
+    }
+
+    try {
+        cout << "Attempting to set stock to 120 max 100" << endl;
+        product.updateStock(120);
+    }
+    catch (const OverCapacityException& e) {
+        cout << "Caught OverCapacityException - what(): " << e.what() << endl;
+    }
+
+    return 0;
+}
