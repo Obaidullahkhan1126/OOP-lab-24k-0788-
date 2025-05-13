@@ -1,0 +1,28 @@
+#include <iostream>
+#include <exception>
+using namespace std;
+
+class TempOutOfRangeException : public exception {
+};
+
+template <typename U>
+U toFahrenheit(U tempCelsius) {
+    if (tempCelsius < -273.15)
+        throw TempOutOfRangeException();
+    
+    return (tempCelsius * 1.8) + 32;
+}
+
+int main() {
+    try {
+        cout << "Trying to convert -300°C" << endl;
+        double resultF = toFahrenheit(-300.0);
+        cout << "Converted value in Fahrenheit: " << resultF << endl;
+    }
+    catch (const TempOutOfRangeException& e) {
+        cout << "Caught TempOutOfRangeException" << endl;
+        cout << "what(): " << e.what() << endl;
+    }
+
+    return 0;
+}
